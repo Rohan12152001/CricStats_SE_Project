@@ -66,12 +66,13 @@ def register():
         elif not username or not password or not email:
             msg = 'Please fill out the form !'
         else:
-            cursor.execute('INSERT INTO users VALUES (%s, %s, %s, %s)', (id, username, email, password))
+            cursor.execute('INSERT INTO users VALUES (%s, %s, %s, %s)', (uuid.uuid4(), username, email, password))
             mysql.connection.commit()
             msg = 'You have successfully registered !'
     elif request.method == 'POST':
         msg = 'Please fill out the form !'
-    return render_template('register.html')
+        return render_template('register.html')
+    return render_template('login.html')
 
 # signal
 def signal_handler(sig, frame):
@@ -127,15 +128,33 @@ def blog_page_with_articleId(articleId=None):
 # Create Blog
 @app.route('/app/blog', methods=['POST'])
 def create_blog():
-    # fetch article details & form vars
+    # upload date automate !!
+    response = {
+        "title": request.form["title"],
+        "blogData": request.form["desc"],
+        "imgUrl": str(request.form["img"]),
+        "blogId": uuid.uuid4(),
+        "userId": session["id"],
+    }
 
-    # fetch authorName if EXISTS
-    # authorDetails = dao.fetchAuthorDetails(article['userId'])
-    #
-    # # attach authorName
-    # article["author"] = authorDetails["userName"]
+    print(response["imgUrl"])
 
-    return render_template('blog.html', article=article)
+    # insert blog if EXISTS
+    done = dao.insertBlog(response)
+
+    # return render_template('blogPage.html', isLoggedIn=logIn, articles=articles)
+    # return redirect("http://localhost:5000/app/blogPage", code=200)
+    # return redirect("/app/blogPage", code=200)
+    return redirect(url_for('blog_page'))
+
+# BlogForm page
+@app.route('/app/blogForm', methods=['GET'])
+def blog_form_page():
+    try:
+        logIn = session["loggedin"]
+    except KeyError:
+        logIn = False
+    return render_template('blog_form.html', isLoggedIn=logIn)
 
 # Series page
 @app.route('/app/series')

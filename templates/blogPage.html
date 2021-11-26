@@ -17,6 +17,7 @@
 		</a>
 		<form class="d-flex">
 			{% if isLoggedIn %}
+				<a class="btn btn-outline-primary ml-2" type="submit" href="/app/blogForm">Create Blog</a>
 				<a id="logout" class="btn btn-outline-primary ml-2" type="submit" href="/app/logout">Logout</a>
 			{% else %}
 				<a id="login" class="btn btn-outline-primary ml-2" type="submit" href="/app/loginPage">Login</a>
@@ -38,7 +39,7 @@
 			<div class="container row justify-content-around align-items-center" id="news_cards">
                 {% for article in articles %}
                     <div class="card mb-3 col-md-3 offset-md-1 justify-content-center text-center col-sm-6">
-<!--                        <img src="" class="card-img-top" alt="...">-->
+                        <img src="{{'%s'%article.url}}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title" id="title">{{article.title}}</h5>
                             <a href="{{ '/app/blog/%s'%article.blogId }}" target="_blank" class="btn btn-primary">View</a>

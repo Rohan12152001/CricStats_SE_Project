@@ -70,3 +70,19 @@ def fetchAuthorDetails(userId):
             print("MySQL connection is closed")
 
     return records
+
+def insertBlog(response):
+    try:
+        cursor = connection.cursor()
+        sql_insert_query = """INSERT INTO blogs values (%s,%s,%s,NOW(),%s,%s)"""
+        cursor.execute(sql_insert_query, (str(response["blogId"]), response["userId"], response["title"], response["blogData"], response["imgUrl"]))
+        connection.commit()
+        print("Success")
+    except Error as e:
+        print("Error inserting data in MySQL table", e)
+    finally:
+        if (connection.is_connected()):
+            cursor.close()
+            # connection.close()
+            print("MySQL connection is closed")
+    return True
