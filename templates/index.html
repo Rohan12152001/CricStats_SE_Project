@@ -12,7 +12,7 @@
 	<nav class="nav navbar sticky-top navbar-dark bg-dark">
 		<div class="container-fluid">
 		<a class="navbar-brand logo-text" href="#">
-			<img src="/logo.png" alt="" width="45" height="35" class="d-inline-block align-text-center">
+			<img src="{{url_for('static', filename = 'logo.png')}}" alt="" width="45" height="35" class="d-inline-block align-text-center">
 			CricStats
 		</a>
 		<form class="d-flex">
@@ -35,7 +35,7 @@
 			</div>
 		</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-	<script src="{{url_for('static', filename = 'index.js')}}"></script>
+<!--	<script src="{{url_for('static', filename = 'index.js')}}"></script>-->
 	<script>
 		const fetchNews = async () => {
 			if(localStorage.getItem('cookie_set') === null)
