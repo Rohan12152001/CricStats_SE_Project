@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CricStats</title>
+	<link href="{{url_for('static', filename = 'styles.css')}}" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<body onload="fetchNews()">
+	<nav class="nav navbar sticky-top navbar-dark bg-dark">
+		<div class="container-fluid">
+		<a class="navbar-brand logo-text" href="#">
+			<img src="{{url_for('static', filename = 'logo.png')}}" alt="" width="45" height="35" class="d-inline-block align-text-center">
+			CricStats
+		</a>
+		<form class="d-flex">
+			{% if isLoggedIn %}
+				<a id="logout" class="btn btn-outline-primary ml-2" type="submit" href="/app/logout">Logout</a>
+			{% else %}
+				<a id="login" class="btn btn-outline-primary ml-2" type="submit" href="/app/loginPage">Login</a>
+				<a id="register" class="btn btn-outline-primary ml-2" type="submit" href="/app/registerPage">Register</a>
+			{% endif %}
+		</form>
+		</div>
+	</nav>
+		<div class=" sidebar">
+			<nav class="nav flex-column align-content-center">
+				<a class="nav-link" href="/app">Home</a>
+				<a class="nav-link" href="/app/series">Series</a>
+				<a class="nav-link" href="/app/results">Results</a>
+				<a class="nav-link" href="/app/fixtures">Fixtures</a>
+			</nav>
+		</div>
+		<div class="content">
+			<div class="container row justify-content-around align-items-center" id="news_cards">
+                {% for article in articles %}
+                    <div class="card mb-3 col-md-3 offset-md-1 justify-content-center text-center col-sm-6">
+                        <img src="" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title" id="title">{{article[title]}}</h5>
+                            <a href="{{ '/app/blog/%s'%article.id }}" target="_blank" class="btn btn-primary">View</a>
+                        </div>
+                    </div>
+                {% endfor %}
+			</div>
+		</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>
