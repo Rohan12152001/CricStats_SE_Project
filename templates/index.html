@@ -38,9 +38,6 @@
 <!--	<script src="{{url_for('static', filename = 'index.js')}}"></script>-->
 	<script>
 		const fetchNews = async () => {
-			if(localStorage.getItem('cookie_set') === null)
-				localStorage.setItem("cookie_set", 0)
-			setLoginBtn()
 			try{
 					let res = await fetch(`https://newsapi.org/v2/everything?q=cricket&apiKey=
 					a22fb0ce14d9440dba11b65fbfcaf025`,
