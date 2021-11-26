@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CricStats</title>
+	<link rel="stylesheet" href="../styles.css">
+	<link rel="stylesheet" href="series.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<body>
+	<nav class="nav navbar sticky-top navbar-dark bg-dark">
+		<div class="container-fluid">
+		<a class="navbar-brand" href="#">
+			<img src="/logo.png" alt="" width="45" height="35" class="d-inline-block align-text-center">
+			CricStats
+		</a>
+		<form class="d-flex">
+			<a id="login" class="btn btn-outline-primary ml-2" type="submit" href="../login.html">Login</a>
+		</form>
+		</div>
+	</nav>
+		<div class=" sidebar">
+			<nav class="nav flex-column align-content-center">
+				<a class="nav-link" id="username" style="color: rgb(36, 4, 32);" href="#"></a>
+				<a class="nav-link" href="/">Home</a>
+				<a class="nav-link" href="series.html">Series</a>
+				<a class="nav-link" href="../results/results.html">Results</a>
+				<a class="nav-link" href="../fixtures/fixtures.html">Fixtures</a>
+			</nav>
+		</div>
+		<div class="content">
+			<div class="container row justify-content-around align-items-center" id="series_cards">
+				<div class="card mb-5 col-md-3 col-sm-6 offset-md-1">
+					<img src="./img/test.jpeg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Test</h5>
+						<p class="card-text">Get information about all the Test series</p>
+						<a href="series_cat.html" onclick="setIndex(0)" class="btn btn-primary">View List</a>
+					</div>
+				</div>
+				<div class="card mb-5 col-md-3 col-sm-6 offset-md-1" >
+					<img src="./img/odi.jpeg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">ODI</h5>
+						<p class="card-text">Get information about all the ODI series</p>
+						<a href="series_cat.html" onclick="setIndex(3)" class="btn btn-primary">View List</a>
+					</div>
+				</div>
+				<div class="card mb-5 col-md-3 col-sm-6 offset-md-1" >
+					<img src="./img/t20i.jpeg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">T20I</h5>
+						<p class="card-text">Get information about all the T20 International series</p>
+						<a href="series_cat.html" onclick="setIndex(1)" class="btn btn-primary">View List</a>
+					</div>
+				</div>
+				<div class="card mb-5 col-md-3 col-sm-6 offset-md-1" >
+					<img src="./img/ipl.jpeg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">T20</h5>
+						<p class="card-text">Get information about all the domestic T20 series</p>
+						<a href="series_cat.html" onclick="setIndex(2)" class="btn btn-primary">View List</a>
+					</div>
+				</div>
+				<div class="card mb-5 col-md-3 col-sm-6 offset-md-1" >
+					<img src="./img/list.jpeg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">List A</h5>
+						<p class="card-text">Get information about all the List A series</p>
+						<a href="series_cat.html" onclick="setIndex(4)" class="btn btn-primary">View List</a>
+					</div>
+				</div>
+				<div class="card mb-5 col-md-3 col-sm-6 offset-md-1" >
+					<img src="./img/first.jpeg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">First Class</h5>
+						<p class="card-text">Get information about all the First Class series</p>
+						<a href="series_cat.html" onclick="setIndex(5)" class="btn btn-primary">View List</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+	<script src="series.js"></script>
+	<script src="../index.js"></script>
+	<script>
+		setLoginBtn()
+		function setIndex(index){
+			localStorage.setItem('index', index);
+		}
+	</script>
+</body>
+</html>
