@@ -103,12 +103,39 @@ def register_page():
 def blog_page():
     # fetch artcles
     articles = dao.fetchArticles()
-    print(articles)
+    print("Art: ", articles)
     try:
         logIn = session["loggedin"]
     except KeyError:
         logIn = False
     return render_template('blogPage.html', isLoggedIn=logIn, articles=articles)
+
+# Particular Blog page
+@app.route('/app/blog/<articleId>', methods=['GET'])
+def blog_page_with_articleId(articleId=None):
+    # fetch one article acoording to PATH PARAM
+    article = dao.fetchOneArticle(articleId)
+
+    # fetch authorName if EXISTS
+    authorDetails = dao.fetchAuthorDetails(article['userId'])
+
+    # attach authorName
+    article["author"] = authorDetails["userName"]
+
+    return render_template('blog.html', article=article)
+
+# Create Blog
+@app.route('/app/blog', methods=['POST'])
+def create_blog():
+    # fetch article details & form vars
+
+    # fetch authorName if EXISTS
+    # authorDetails = dao.fetchAuthorDetails(article['userId'])
+    #
+    # # attach authorName
+    # article["author"] = authorDetails["userName"]
+
+    return render_template('blog.html', article=article)
 
 # Series page
 @app.route('/app/series')

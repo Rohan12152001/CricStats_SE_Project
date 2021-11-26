@@ -31,18 +31,19 @@
 				<a class="nav-link" href="/app/series">Series</a>
 				<a class="nav-link" href="/app/results">Results</a>
 				<a class="nav-link" href="/app/fixtures">Fixtures</a>
+				<a class="nav-link" href="/app/blogPage">Blogs</a>
 			</nav>
 		</div>
 		<div class="content">
 			<div class="container row justify-content-around align-items-center" id="news_cards">
-				<h1 id="article-title">{{article['title']}}</h1>
+				<h1 id="article-title">{{article.title}}</h1>
                 <div class="news-sec">
                     
                     <img id="news-image" src="" alt="news-photo" height = "50%" width = "50%">
-                    <h3 id="news-desc">{{article['data']}}</h3>
                     <center>
-                        <p class="subc">Author : {{article['author']}}</p>
-                        <p class="subc">Published At : {{article['date']}}</p>
+						<p id="news-desc">{{article.blogData}}</p>
+                        <p class="subc">Author : {{article.author}}</p>
+                        <p class="subc">Published On : {{article.uploadDate}}</p>
                     </center>
                 </div>
 			</div>
