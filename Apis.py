@@ -8,6 +8,7 @@ from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
 import uuid
+import dao
 
 id = uuid.uuid4()
 
@@ -78,7 +79,7 @@ def signal_handler(sig, frame):
     close()
     sys.exit(0)
 
-# Home page that returns an html page !!
+# Home page
 @app.route('/app')
 def home_page():
     try:
@@ -87,15 +88,27 @@ def home_page():
         logIn = False
     return render_template('index.html', isLoggedIn=logIn)
 
-# Login page that returns an html page !!
+# Login page
 @app.route('/app/loginPage')
 def login_page():
     return render_template('login.html')
 
-# Register page that returns an html page !!
+# Register page
 @app.route('/app/registerPage')
 def register_page():
     return render_template('register.html')
+
+# Blog page
+@app.route('/app/blogPage')
+def blog_page():
+    # fetch artcles
+    articles = dao.fetchArticles()
+    print(articles)
+    try:
+        logIn = session["loggedin"]
+    except KeyError:
+        logIn = False
+    return render_template('blogPage.html', isLoggedIn=logIn, articles=articles)
 
 # Series page
 @app.route('/app/series')
