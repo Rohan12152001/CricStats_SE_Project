@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CricStats</title>
+	<link href="{{url_for('static', filename = 'styles.css')}}" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<body onload="fetchNews()">
+	<nav class="nav navbar sticky-top navbar-dark bg-dark">
+		<div class="container-fluid">
+		<a class="navbar-brand logo-text" href="#">
+			<img src="/logo.png" alt="" width="45" height="35" class="d-inline-block align-text-center">
+			CricStats
+		</a>
+		<form class="d-flex">
+			<a id="login" class="btn btn-outline-primary ml-2" type="submit" >Login</a>
+		</form>
+		</div>
+	</nav>
+		<div class=" sidebar">
+			<nav class="nav flex-column align-content-center">
+				<a class="nav-link" id="username" style="color: rgb(36, 4, 32); text-decoration: underline;" href="#"></a>
+				<a class="nav-link" href="/">Home</a>
+				<a class="nav-link" href="series.html">Series</a>
+				<a class="nav-link" href="/results/results.html">Results</a>
+				<a class="nav-link" href="/fixtures/fixtures.html">Fixtures</a>
+			</nav>
+		</div>
+		<div class="content">
+			<div class="container row justify-content-around align-items-center" id="news_cards">
+				
+			</div>
+		</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+	<script src="{{url_for('static', filename = 'index.js')}}"></script>
+	<script>
+		const fetchNews = async () => {
+			if(localStorage.getItem('cookie_set') === null)
+				localStorage.setItem("cookie_set", 0)
+			setLoginBtn()
+			try{
+					let res = await fetch(`https://newsapi.org/v2/everything?q=cricket&apiKey=
+					a22fb0ce14d9440dba11b65fbfcaf025`,
+					{
+						"method": "GET",
+					})
+					let data = await res.json()
+					console.log(data.articles)
+					let len = Math.min(50, data.articles.length);
+					var ref = document.getElementById('news_cards');
+					for (let i = 0; i<len; i++) {
+						let element = data.articles[i];
+						ref.insertAdjacentHTML('beforeend',
+						`
+							<div class="card mb-3 col-md-3 offset-md-1 justify-content-center text-center col-sm-6">
+								<img src="${element.urlToImage}" class="card-img-top" alt="...">
+								<div class="card-body">
+									<h5 class="card-title" id="title${i}">${element.title}</h5>
+									<a href="${element.url}" target="_blank" class="btn btn-primary">View</a>
+									<button type="button" id="speaker${i}">
+										<img src="/speaker.png" width="30" height="30"></img>
+									</button>
+								</div>
+							</div>
+						`);
+					}
+					for (let i = 0; i<len; i++) {
+						let b = document.getElementById(`speaker${i}`)
+						let t = document.getElementById(`title${i}`)
+						b.addEventListener('click', () => {
+									const synth = window.speechSynthesis;
+									var utterThis = new SpeechSynthesisUtterance(t.innerText);
+									synth.speak(utterThis);
+								}
+						)
+					}
+			}catch(err){
+				console.log("Error", err)
+			}
+		}
+
+		const speaker = (title) => {
+			console.log(title)
+			const synth = window.speechSynthesis;
+			var utterThis = new SpeechSynthesisUtterance(title);
+			synth.speak(utterThis);
+		}
+
+	</script>
+</body>
+</html>

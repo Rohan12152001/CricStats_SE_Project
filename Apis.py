@@ -5,7 +5,7 @@ from dao import close, DB
 import datetime, time
 from mysql.connector import Error
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/templates/static')
 
 # signal
 def signal_handler(sig, frame):
@@ -16,7 +16,7 @@ def signal_handler(sig, frame):
 # Home page that returns an html page !!
 @app.route('/app')
 def home_page():
-    return render_template('Home.html')
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.secret_key = DB.secretKey
