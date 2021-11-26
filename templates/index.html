@@ -16,13 +16,17 @@
 			CricStats
 		</a>
 		<form class="d-flex">
-			<a id="login" class="btn btn-outline-primary ml-2" type="submit" >Login</a>
+			{% if isLoggedIn %}
+				<a id="logout" class="btn btn-outline-primary ml-2" type="submit" href="/app/logout">Logout</a>
+			{% else %}
+				<a id="login" class="btn btn-outline-primary ml-2" type="submit" href="/app/loginPage">Login</a>
+				<a id="register" class="btn btn-outline-primary ml-2" type="submit" href="/app/registerPage">Register</a>
+			{% endif %}
 		</form>
 		</div>
 	</nav>
 		<div class=" sidebar">
 			<nav class="nav flex-column align-content-center">
-				<a class="nav-link" id="username" style="color: rgb(36, 4, 32); text-decoration: underline;" href="#"></a>
 				<a class="nav-link" href="/app">Home</a>
 				<a class="nav-link" href="/app/series">Series</a>
 				<a class="nav-link" href="/app/results">Results</a>
