@@ -23,36 +23,28 @@
 				<a id="register" class="btn btn-outline-primary ml-2" type="submit" href="/app/registerPage">Register</a>
 			{% endif %}
 		</form>
+
+        <form action="/app/blog" method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" aria-describedby="titleHelp" required>
+            </div>
+            <div class="mb-3">
+                <label for="desc" class="form-label">Description</label>
+                <textarea id="desc" name="desc" rows="4" cols="50" required>
+                    Enter your description.
+                </textarea>
+            </div>
+            <div class="mb-3">
+                <label for="img" class="form-label">Image Url</label>
+                <input type="url" id="img" name="img" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
 		</div>
+
 	</nav>
-		<div class=" sidebar">
-			<nav class="nav flex-column align-content-center">
-				<a class="nav-link" href="/app">Home</a>
-				<a class="nav-link" href="/app/series">Series</a>
-				<a class="nav-link" href="/app/results">Results</a>
-				<a class="nav-link" href="/app/fixtures">Fixtures</a>
-				<a class="nav-link" href="/app/blogPage">Blogs</a>
-			</nav>
-		</div>
-		<div class="content">
-			<div class="container row justify-content-around align-items-center" id="news_cards">
-				<h1 id="news-title">
-            
-                </h1>
-                <div class="news-sec">
-                    
-                    <img id="news-image" scr="" alt="news-photo" height = "50%" width = "50%">
-                    <h3 id="news-desc"></h3>
-                    <center>
-                        <p class="subc">Author : </p>
-                        <p id="news-author"></p>
-                        <br/>
-                        <p class="subc">Published At : </p>
-                        <p id="news-time"></p>
-                    </center>
-                </div>
-			</div>
-		</div>
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 </body>
 </html>
