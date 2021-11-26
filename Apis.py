@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request, render_template, redirect, url_for
 import mysql.connector, sys, os, webbrowser
-import requests
+import requests, signal
+from dao import close, DB
 import datetime, time
 from mysql.connector import Error
 
@@ -16,9 +17,6 @@ def signal_handler(sig, frame):
 @app.route('/app')
 def home_page():
     return render_template('Home.html')
-
-# print(int(time.time()))
-app.run(port=5000)
 
 if __name__ == '__main__':
     app.secret_key = DB.secretKey
